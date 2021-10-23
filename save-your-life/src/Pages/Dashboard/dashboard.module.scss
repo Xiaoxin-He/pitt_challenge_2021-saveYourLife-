@@ -5,8 +5,30 @@
     .left-panel {
         flex: 2;
         margin-right: 12px;
+        display: flex;
+        flex-direction: column;
+        :first-child {
+            flex: 2;
+            margin-bottom: 12px;
+        }
+        :last-child {
+            flex: 1;
+        }
     }
     .right-panel {
         flex: 1;
+    }
+    // adjust to column layout
+    @media screen and (max-width: 1100px) {
+        display: block;
+        overflow: auto;
+        .left-panel {
+            height: 80%;
+            margin-bottom: 12px;
+            margin-right: 0;
+        }
+        .right-panel {
+            height: 50%;
+        }
     }
 }

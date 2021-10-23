@@ -7,7 +7,6 @@ import styles from './layout.module.scss';
 
 export default function Content() {
   let match = useRouteMatch();
-  console.log(match);
   return (
     <div className={styles['syl-layout-content']}>
       <Suspense fallback={<Loading></Loading>}>

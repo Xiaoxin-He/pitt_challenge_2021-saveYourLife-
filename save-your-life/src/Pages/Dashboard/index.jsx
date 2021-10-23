@@ -1,14 +1,25 @@
-import styles from './dashboard.module.scss'
+import styles from './dashboard.module.scss';
+import Block from '../../components/Block';
+import DataList from '../../components/DataList';
 
 export default function Dashboard() {
-    return (
-        <div className={styles.dashboard}>
-            <div className={styles['left-panel']}>
+  return (
+    <div className={styles.dashboard}>
+      <div className={styles['left-panel']}>
+        <Block className="warning" link="/warning">
 
-            </div>
-            <div className={styles['right-panel']}>
-                
-            </div>
-        </div>
-    )
+        </Block>
+        <Block className="plan" link="/plan">
+
+        </Block>
+      </div>
+      <div className={styles['right-panel']}>
+        <Block className="data" link="/data">
+          <DataList>
+            
+          </DataList>
+        </Block>
+      </div>
+    </div>
+  );
 }
