@@ -2,9 +2,14 @@ import { IconButton, Menu, MenuItem } from '@mui/material';
 import styles from './layout.module.scss';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [currentStatus, setCurrentStatus] = useState("Log Out");
+  const history = useHistory();
+  
+
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -12,7 +17,10 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  const onLogout = () => {};
+  const onLogout = () => {
+    history.push("/login");
+    setCurrentStatus("Log In");
+  };
 
   return (
     <div className={styles['syl-layout-header']}>
@@ -31,7 +39,7 @@ export default function Header() {
           open={!!anchorEl}
           onClose={handleClose}
         >
-          <MenuItem onClick={onLogout}>Log out</MenuItem>
+          <MenuItem onClick={onLogout}>{currentStatus}</MenuItem>
         </Menu>
       </div>
     </div>
