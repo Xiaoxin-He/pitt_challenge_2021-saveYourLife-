@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemText, ListSubheader } from '@mui/material';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styles from './DataList.module.scss';
 
 export default function DataList() {
@@ -29,20 +29,21 @@ export default function DataList() {
     <div className={styles['data-list']}>
       <List subheader={<li />}>
         {dispData.map((item) => (
-          <>
-            <ListSubheader className={styles['list-item-title']}>
+          <Fragment key={`sub-${item.label}`}>
+            {/* <ListSubheader className={styles['list-item-title']}>
               {item.label}
-            </ListSubheader>
+            </ListSubheader> */}
             <ListItem divider>
               <ListItemText
                 className={classNames({
                   [styles.warning]: item.status !== 0
                 })}
+                primary={item.label}
+                secondary={item.value}
               >
-                {item.value}
               </ListItemText>
             </ListItem>
-          </>
+          </Fragment>
         ))}
       </List>
     </div>

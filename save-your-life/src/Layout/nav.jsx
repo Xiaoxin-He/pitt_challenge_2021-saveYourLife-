@@ -6,7 +6,6 @@ import classNames from 'classnames';
 
 export default function Nav() {
   const location = useLocation();
-  console.log(location)
   return (
     <div className={styles['syl-layout-nav']}>
       {routes.map((route) => (
