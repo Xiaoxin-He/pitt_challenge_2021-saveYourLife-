@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
+import sql_util
 
 app = Flask(__name__)
 
@@ -33,14 +34,21 @@ def getAllFood(pagenum):
     '''
     try:
         # get data from database
-        # for each page, contains 20 items
-        foods = ["Milk, human", "Milk, NFS", "Milk, whole", "Milk, low sodium, whole"]
-        ids = [1,2,3,4]
-        calories = [70, 51, 60, 61]
-        images = ["https://media.npr.org/assets/img/2015/04/07/breast-milk_custom-a66e540b37943ead359ef56810a0fffc80c95362.jpg","https://happyforks.com/static/foto/prod/mobile-l/4.jpg","https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg","https://m.media-amazon.com/images/S/assets.wholefoodsmarket.com/PIE/product/00713757061933_C1N1f.JPG"]
+        # for each page, contains 10 items
+        # foods = ["Milk, human", "Milk, NFS", "Milk, whole", "Milk, low sodium, whole"]
+        # ids = [1,2,3,4]
+        # calories = [70, 51, 60, 61]
+        # images = ["https://media.npr.org/assets/img/2015/04/07/breast-milk_custom-a66e540b37943ead359ef56810a0fffc80c95362.jpg","https://happyforks.com/static/foto/prod/mobile-l/4.jpg","https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg","https://m.media-amazon.com/images/S/assets.wholefoodsmarket.com/PIE/product/00713757061933_C1N1f.JPG"]
+
+        pagenum = int(pagenum)
+        start = 10 * (pagenum - 1)
+        end = 10 * pagenum
+        sql = f"select * from food where food_id>{start} and food_id<={end};"
+        sql_res = sql_util.execute(sql)
+        print(sql_res)
 
         res = []
-        for id, food, calorie, image in zip(ids, foods, calories, images):
+        for id, food, calorie, image in sql_res:
             res.append({
                 "food_id": id,
                 "food_name": food,
