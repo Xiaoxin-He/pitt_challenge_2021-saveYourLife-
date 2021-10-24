@@ -8,6 +8,7 @@ export default function DataList() {
   const userWeights = useSelector((state) => state.userInfo.weight);
   const userHeight = useSelector((state) => state.userInfo.height);
   const lastWeight = userWeights[userWeights.length - 1].value;
+  const bmi = ((lastWeight * 0.45359237) / Math.pow(userHeight / 100, 2)).toFixed(2)
   const dispData = [
     {
       label: 'Height',
@@ -23,8 +24,8 @@ export default function DataList() {
     },
     {
       label: 'BMI',
-      value: ((lastWeight * 0.45359237) / Math.pow(userHeight / 100, 2)).toFixed(2),
-      status: 2
+      value: bmi,
+      status: bmi > 25 || bmi < 18.5 ? 1 : 0
     }
   ];
   useEffect(() => {

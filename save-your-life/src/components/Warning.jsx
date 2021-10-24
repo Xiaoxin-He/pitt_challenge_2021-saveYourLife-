@@ -4,21 +4,35 @@ import styles from './warning.module.scss';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import { useSelector } from 'react-redux';
 
 export default function Warning() {
   const [warningList, setWarningList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const userWeights = useSelector((state) => state.userInfo.weight);
+  const userHeight = useSelector((state) => state.userInfo.height);
+  const lastWeight = userWeights[userWeights.length - 1].value;
+  const bmi = ((lastWeight * 0.45359237) / Math.pow(userHeight / 100, 2)).toFixed(2)
   useEffect(() => {
-    async function fetchList() {
-      // TODO: get warning list
-      setLoading(true);
-      setWarningList([
-        { title: 'Overweight', content: 'Your BMI falls within the overweight range. It could indicate that ...' },
-      ]);
-      setLoading(false);
+    if (bmi > 25) {
+      setWarningList([{ title: 'Overweight', content: 'Your BMI falls within the overweight range. It could indicate that ...' }])
+    } else if (bmi < 18.5) {
+      setWarningList([{ title: 'Underweight', content: 'Your BMI falls within the underweight range. It could indicate that ...' }])
+    } else {
+      setWarningList([])
     }
-    fetchList();
-  }, []);
+  }, [userWeights, bmi])
+//   useEffect(() => {
+//     async function fetchList() {
+//       // TODO: get warning list
+//       setLoading(true);
+//       setWarningList([
+//         { title: 'Overweight', content: 'Your BMI falls within the overweight range. It could indicate that ...' },
+//       ]);
+//       setLoading(false);
+//     }
+//     fetchList();
+//   }, []);
   let BlockEle;
   if (loading) {
     BlockEle = Loading;

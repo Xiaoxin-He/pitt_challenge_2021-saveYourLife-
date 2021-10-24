@@ -61,8 +61,8 @@ export default function Plot({ type, extra }) {
   const data = useSelector(state => state.userInfo.weight)
   type = 'weight';
   extra = {
-    under: 120,
-    over: 170
+    under: 115,
+    over: 156
   };
   const [eleId, setEleId] = useState(() => `ele-${Math.random()}`);
   const [plot, setPlot] = useState(null);
