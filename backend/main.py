@@ -166,7 +166,15 @@ def insertWeight():
         return jsonify([{"result": "succeed", "status": 200}])
     except Exception as e:
         return jsonify([{"result": e, "status": 500}])
-    
+
+@app.route("/getWarning/")
+def giveWarning():
+    try:
+
+        return jsonify([{"result": "Trend to overweight in 3 months.", "status":200}])
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
