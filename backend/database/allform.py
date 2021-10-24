@@ -48,15 +48,33 @@ def fitnessform(conn):
         conn.commit()
 
 def food_record(conn):
-    with conn.cusor() as cur:
+    with conn.cursor() as cur:
         cur.execute("CREATE TABLE food_record(uid int, food_id int, amount float, date date)")
-        logging.debug("fitnessform(): status message: %s", cur.statusmessage)
+        logging.debug("food_record(): status message: %s", cur.statusmessage)
         conn.commit()
 
 def fitness_record(conn):
-    with conn.cusor() as cur:
-        cur.execute("CREATE TABLE fintness_record(uid int, f_id int, amount float, date date)")
-        logging.debug("fitnessform(): status message: %s", cur.statusmessage)
+    with conn.cursor() as cur:
+        cur.execute("CREATE TABLE fitness_record(uid int, f_id int, duration string, date date)")
+        logging.debug("fitness_record(): status message: %s", cur.statusmessage)
+        conn.commit()
+
+def sleep_record(conn):
+    with conn.cursor() as cur:
+        cur.execute("CREATE TABLE sleep_record(uid int, f_id int, duration string, date date)")
+        logging.debug("sleep_record(): status message: %s", cur.statusmessage)
+        conn.commit()
+
+def mood_record(conn):
+    with conn.cursor() as cur:
+        cur.execute("CREATE TABLE mood_record(uid int, m_id int, date date)")
+        logging.debug("mood_record(): status message: %s", cur.statusmessage)
+        conn.commit()
+
+def weight_record(conn):
+    with conn.cursor() as cur:
+        cur.execute("CREATE TABLE weight_record(uid int, weight float, date date)")
+        logging.debug("weight_record(): status message: %s", cur.statusmessage)
         conn.commit()
 
 def main():
@@ -66,6 +84,10 @@ def main():
   foodform(conn)
   fitnessform(conn)
   food_record(conn)
+  fitness_record(conn)
+  sleep_record(conn)
+  mood_record(conn)
+  weight_record(conn)
 
   # Close communication with the database.
   conn.close()
