@@ -11,7 +11,7 @@ const UserData = () => {
     const dataRef = useRef(defaultData);
 
     useEffect(() => {
-        // console.log(data)
+        console.log(dataRef.current[0].result)
     }, [])
 
     const onInputWeight = (params) => {}
@@ -19,6 +19,23 @@ const UserData = () => {
 return(
 
     <div>
+        <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        className= {classes.food_input}
+        disableClearable
+        options={dataRef.current[0].result.map((option) => option.food_name)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search Food 🍔"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
         {dataRef.current.map((data, key) => {
             // console.log("data",data.result)
             // console.log(key)
@@ -55,14 +72,3 @@ return(
 }
 
 export default UserData;
-
-
-const weight = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 },
-    { label: 'The Dark Knight', year: 2008 },
-    { label: '12 Angry Men', year: 1957 },
-    { label: "Schindler's List", year: 1993 },
-    { label: 'Pulp Fiction', year: 1994 }
-]
