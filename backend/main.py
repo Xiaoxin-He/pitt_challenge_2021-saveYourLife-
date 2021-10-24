@@ -170,8 +170,8 @@ def insertWeight():
 @app.route("/getWarning/")
 def giveWarning():
     try:
-
-        return jsonify([{"result": "Trend to overweight in 3 months.", "status":200}])
+        msg = ["Trend to overweight in 3 months.", "High calorie income with little time to do exercise.", "Bad emotion status may influence you to eat more food than usual.", "Too less sleeping time may let you gain more fats."]
+        return jsonify([{"result": msg, "status":200}])
     except Exception as e:
         return jsonify([{"result": e, "status": 500}])
 
