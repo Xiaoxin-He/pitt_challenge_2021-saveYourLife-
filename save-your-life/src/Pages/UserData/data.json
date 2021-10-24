@@ -1,0 +1,29 @@
+[{
+    "result": [
+        {
+            "energy": 70,
+            "food_id": 1,
+            "food_name": "Milk, human",
+            "image": "https://media.npr.org/assets/img/2015/04/07/breast-milk_custom-a66e540b37943ead359ef56810a0fffc80c95362.jpg"
+        },
+        {
+            "energy": 51,
+            "food_id": 2,
+            "food_name": "Milk, NFS",
+            "image": "https://happyforks.com/static/foto/prod/mobile-l/4.jpg"
+        },
+        {
+            "energy": 60,
+            "food_id": 3,
+            "food_name": "Milk, whole",
+            "image": "https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg"
+        },
+        {
+            "energy": 61,
+            "food_id": 4,
+            "food_name": "Milk, low sodium, whole",
+            "image": "https://m.media-amazon.com/images/S/assets.wholefoodsmarket.com/PIE/product/00713757061933_C1N1f.JPG"
+        }
+    ],
+    "status": 200
+}]
