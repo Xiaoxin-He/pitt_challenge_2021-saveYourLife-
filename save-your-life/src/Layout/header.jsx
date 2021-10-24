@@ -3,6 +3,7 @@ import styles from './layout.module.scss';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import UserDialog from "./UserDialog";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,6 +26,7 @@ export default function Header() {
   return (
     <div className={styles['syl-layout-header']}>
       <div className={styles['syl-layout-header-title']}>SaveYourLife</div>
+      <UserDialog/>
       <div className={styles['syl-layout-header-user']}>
         <IconButton
           onClick={handleUserClick}
