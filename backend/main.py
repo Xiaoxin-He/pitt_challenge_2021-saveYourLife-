@@ -111,17 +111,50 @@ def insertFitnessRecord():
 def getAllMood():
     return
 
-@app.route("/insertMoodRecord", methods=["POST"])
-def insertMood():
-    return
-
 @app.route("/getAllSleep/")
-def insertSleep():
+def getAllSleep():
     return
 
-@app.route("/insertWeight", methods=["POST"])
+@app.route("/insertWeightMoodSleep", methods=["POST"])
 def insertWeight():
-    return
+    try:
+        '''
+        Example Request:
+        {
+            "weight": 50,
+            "sleeptime": 8.5,
+            "mood": 5,
+            "date": "2021-10-24",
+            "uid": 1
+        }
+        '''
+
+        data = request.get_json()
+        uid = int(data["uid"]) if "uid" in data else 1
+        weight = float(data["weight"])
+        mood = int(data["mood"])
+        date = "2021-10-24"
+        sleeptime = float(data["sleeptime"])
+
+        # insert weight
+        sql = "INSERT INTO weight_record VALUES (%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, weight, date))
+
+        # insert sleeptime
+        sql = "INSERT INTO sleep_record VALUES (%s,%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, 0, str(sleeptime), date))
+
+        # insert mood
+        sql = "INSERT INTO mood_record VALUES (%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, mood, date))
+
+        print(sql_util.execute("select * from food_record;"))
+        print(sql_util.execute("select * from sleep_record;"))
+        print(sql_util.execute("select * from mood_record;"))
+        return jsonify([{"result": "succeed", "status": 200}])
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+    
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
