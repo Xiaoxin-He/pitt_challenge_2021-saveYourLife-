@@ -27,7 +27,7 @@ const STATIC_ROUTES = [
     icon: (props) => (<div style={props.style}><LightbulbIcon></LightbulbIcon></div>)
   },
   {
-    name: 'Plan',
+    name: 'Robot',
     link: 'plan',
     path: '/plan',
     component: lazy(() => import("../Pages/Plan")),
