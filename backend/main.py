@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request, jsonify
+import sql_util
 
 app = Flask(__name__)
 
@@ -33,14 +34,21 @@ def getAllFood(pagenum):
     '''
     try:
         # get data from database
-        # for each page, contains 20 items
-        foods = ["Milk, human", "Milk, NFS", "Milk, whole", "Milk, low sodium, whole"]
-        ids = [1,2,3,4]
-        calories = [70, 51, 60, 61]
-        images = ["https://media.npr.org/assets/img/2015/04/07/breast-milk_custom-a66e540b37943ead359ef56810a0fffc80c95362.jpg","https://happyforks.com/static/foto/prod/mobile-l/4.jpg","https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg","https://m.media-amazon.com/images/S/assets.wholefoodsmarket.com/PIE/product/00713757061933_C1N1f.JPG"]
+        # for each page, contains 10 items
+        # foods = ["Milk, human", "Milk, NFS", "Milk, whole", "Milk, low sodium, whole"]
+        # ids = [1,2,3,4]
+        # calories = [70, 51, 60, 61]
+        # images = ["https://media.npr.org/assets/img/2015/04/07/breast-milk_custom-a66e540b37943ead359ef56810a0fffc80c95362.jpg","https://happyforks.com/static/foto/prod/mobile-l/4.jpg","https://i5.walmartimages.com/asr/83f533c3-3234-4bea-80bf-a0f9a43cd279_2.9b223f40bab27c513ba64f9f0e3fc2d9.jpeg","https://m.media-amazon.com/images/S/assets.wholefoodsmarket.com/PIE/product/00713757061933_C1N1f.JPG"]
+
+        pagenum = int(pagenum)
+        start = 10 * (pagenum - 1)
+        end = 10 * pagenum
+        sql = f"select * from food where food_id>{start} and food_id<={end};"
+        sql_res = sql_util.execute(sql)
+        print(sql_res)
 
         res = []
-        for id, food, calorie, image in zip(ids, foods, calories, images):
+        for id, food, calorie, image in sql_res:
             res.append({
                 "food_id": id,
                 "food_name": food,
@@ -74,14 +82,17 @@ def insertFoodRecord():
     '''
     try:
         data = request.get_json()
-        uid = data["uid"]
+        uid = data["uid"] if "uid" in data else 1
         foods = data["foods"]
-        date = data["date"]
+        date = "2021-10-24"
 
         # call sql insert
         for food in foods:
-            print(uid, food, date)
+            values = (int(uid), int(food["food_id"]), float(food["amount"]), date)
+            sql = "INSERT INTO food_record VALUES (%s,%s,%s,%s)"
 
+            res = sql_util.execute(sql, values)
+        # print(sql_util.execute("select * from food_record;"))
         return jsonify([{"result": "succeed", "status": 200}])
     except Exception as e:
         return jsonify([{"result": e, "status": 500}])
@@ -100,17 +111,70 @@ def insertFitnessRecord():
 def getAllMood():
     return
 
-@app.route("/insertMoodRecord", methods=["POST"])
-def insertMood():
-    return
-
 @app.route("/getAllSleep/")
-def insertSleep():
-    return
+def getAllSleep():
+    try:
+        uid = 1
+        sql = "SELECT duration, date from sleep_record where uid=1 order by date desc limit 30"
+        sql_res = sql_util.execute(sql)
+        res = []
+        for duration, date in sql_res:
+            res.append({"sleeptime":float(duration), "date":date})
 
-@app.route("/insertWeight", methods=["POST"])
+        return jsonify([{"result": res, "status": 200}])
+
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+    
+
+@app.route("/insertWeightMoodSleep", methods=["POST"])
 def insertWeight():
-    return
+    try:
+        '''
+        Example Request:
+        {
+            "weight": 50,
+            "sleeptime": 8.5,
+            "mood": 5,
+            "date": "2021-10-24",
+            "uid": 1
+        }
+        '''
+
+        data = request.get_json()
+        uid = int(data["uid"]) if "uid" in data else 1
+        weight = float(data["weight"]) 
+        mood = int(data["mood"]) if "mood" in data else 5.0
+        date = "2021-10-24"
+        sleeptime = float(data["sleeptime"]) if "mood" in data else 8.0
+
+        # insert weight
+        sql = "INSERT INTO weight_record VALUES (%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, weight, date))
+
+        # insert sleeptime
+        sql = "INSERT INTO sleep_record VALUES (%s,%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, 0, str(sleeptime), date))
+
+        # insert mood
+        sql = "INSERT INTO mood_record VALUES (%s,%s,%s)"
+        res = sql_util.execute(sql, (uid, mood, date))
+
+        print(sql_util.execute("select * from food_record;"))
+        print(sql_util.execute("select * from sleep_record;"))
+        print(sql_util.execute("select * from mood_record;"))
+        return jsonify([{"result": "succeed", "status": 200}])
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+
+@app.route("/getWarning/")
+def giveWarning():
+    try:
+
+        return jsonify([{"result": "Trend to overweight in 3 months.", "status":200}])
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
