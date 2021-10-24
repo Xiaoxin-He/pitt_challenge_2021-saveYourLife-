@@ -4,14 +4,22 @@ import React, {useRef, useState, useEffect} from "react";
 import classes from "./index.module.css";
 import defaultData from "./data.json";
 import FoodCard from "./FoodCard/FoodCard";
-
+import axios from 'axios';
 
 const UserData = () => {
 
-    const dataRef = useRef(defaultData);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         // console.log(data)
+        async function fetchData() {
+            const res = await axios.request({
+                method: "get",
+                url: "/getAllFood/1/"
+            })
+            setData(res.data);
+        }
+        fetchData();
     }, [])
 
     const onInputWeight = (params) => {}
@@ -19,7 +27,7 @@ const UserData = () => {
 return(
 
     <div>
-        {dataRef.current.map((data, key) => {
+        {data.map((data, key) => {
             // console.log("data",data.result)
             // console.log(key)
             return (
