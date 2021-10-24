@@ -52,7 +52,7 @@ def getAllFood(pagenum):
     except Exception as e:
         return jsonify([{"result": e, "status": 500}])
 
-@app.route("/insertFoodRecord/", methods=["POST"])
+@app.route("/insertFoodRecord", methods=["POST"])
 def insertFoodRecord():
     '''
     Example Request:
@@ -73,18 +73,44 @@ def insertFoodRecord():
     }
     '''
     try:
-        uid = request.form["uid"]
-        foods = request.form["foods"]
-        date = request.form["date"]
+        data = request.get_json()
+        uid = data["uid"]
+        foods = data["foods"]
+        date = data["date"]
 
         # call sql insert
         for food in foods:
-            pass
+            print(uid, food, date)
 
-        return {"result": "succeed", "status": 200}
+        return jsonify([{"result": "succeed", "status": 200}])
     except Exception as e:
-        return {"result": e, "status": 500}
+        return jsonify([{"result": e, "status": 500}])
     
+@app.route("/getAllFitness/")
+def getAllFitness():
+
+
+    return
+
+@app.route("/insertFitnessRecord", methods=["POST"])
+def insertFitnessRecord():
+    return
+
+@app.route("/getAllMood/")
+def getAllMood():
+    return
+
+@app.route("/insertMoodRecord", methods=["POST"])
+def insertMood():
+    return
+
+@app.route("/getAllSleep/")
+def insertSleep():
+    return
+
+@app.route("/insertWeight", methods=["POST"])
+def insertWeight():
+    return
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
