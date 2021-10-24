@@ -57,7 +57,7 @@ const UserData = () => {
             setData(res.data);
         }
         fetchData();
-    }, [data])
+    }, [])
 
     defaultData.current = data;
 
