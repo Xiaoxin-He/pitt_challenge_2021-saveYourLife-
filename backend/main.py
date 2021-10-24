@@ -1,11 +1,7 @@
 from flask import Flask
-from flask import request
+from flask import request, jsonify
 
 app = Flask(__name__)
-
-@app.route("/test/")
-def hello_world():
-    return "<p>Hello, World!</p>"
 
 @app.route("/predict/", methods=["GET", "POST"])
 def predict():
@@ -52,9 +48,9 @@ def getAllFood(pagenum):
                 "image": image
             })
 
-        return {"result": res, "status": 200}
+        return jsonify([{"result": res, "status": 200}])
     except Exception as e:
-        return {"result": e, "status": 500}
+        return jsonify([{"result": e, "status": 500}])
 
 @app.route("/insertFoodRecord/", methods=["POST"])
 def insertFoodRecord():
