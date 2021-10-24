@@ -6,9 +6,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import {addWeight} from '../store/modules/userInfo'
+import { useDispatch } from 'react-redux';
 
 export default function UserDialog() {
   const [open, setOpen] = React.useState(false);
+  const [weight, setWeight] = React.useState('');
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,6 +22,13 @@ export default function UserDialog() {
     alert("Thank you for your check in !")
     setOpen(false);
   };
+  
+  const handleSubmit = () => {
+    if (Number(weight)) {
+      dispatch(addWeight(Number(weight)))
+    }
+    handleClose();
+  }
 
     return (
         <div>
@@ -38,6 +49,8 @@ export default function UserDialog() {
               type="text"
               fullWidth
               variant="standard"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
             />
           </DialogContent>
 
@@ -68,7 +81,7 @@ export default function UserDialog() {
 
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Done For Today</Button>
+            <Button onClick={handleSubmit}>Done For Today</Button>
           </DialogActions>
         </Dialog>
       </div>
