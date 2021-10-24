@@ -9,10 +9,11 @@ import axios from 'axios';
 const UserData = () => {
 
     const [data, setData] = useState([]);
+    const defaultData = useRef([]);
 
     useEffect(() => {
         // console.log(dataRef.current[0].result)
-        // console.log(data)
+        // console.log(defaultData.current)
         async function fetchData() {
             const res = await axios.request({
                 method: "get",
@@ -21,7 +22,9 @@ const UserData = () => {
             setData(res.data);
         }
         fetchData();
-    }, [])
+    }, [data])
+
+    defaultData.current = data;
 
     const onInputWeight = (params) => {}
 
@@ -33,7 +36,7 @@ return(
         id="free-solo-2-demo"
         className= {classes.food_input}
         disableClearable
-        options={dataRef.current[0].result.map((option) => option.food_name)}
+        options={defaultData.current[0].map((option) => option.food_name)}
         renderInput={(params) => (
           <TextField
             {...params}
