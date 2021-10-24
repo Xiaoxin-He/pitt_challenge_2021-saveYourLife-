@@ -21,7 +21,7 @@ export default function UserDialog() {
     return (
         <div>
         <Button variant="outlined" onClick={handleClickOpen} style={{left: "820px", background: "white", fontWeight: "bold"}}>
-          Daily Check In
+          Daily Check In 🪙
         </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Good Morning</DialogTitle>

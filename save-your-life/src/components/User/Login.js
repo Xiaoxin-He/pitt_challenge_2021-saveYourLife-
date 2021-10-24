@@ -36,10 +36,12 @@ const Login = () => {
                     </Grid>
                     <div className={classes.textField}>
                     <TextField label="Email" placeholder="Enter email" inputRef={emailRef}
+                    type="email"
                     fullWidth required
                     ></TextField>
                     </div>
                     <TextField label="Password" placeholder="Enter password" inputRef={passwordRef}
+                    type="password"
                      fullWidth required></TextField>
                      <FormGroup>
                          <FormControlLabel control={<Checkbox defaultChecked />} label="Remember Me" />
