@@ -58,8 +58,8 @@ const annotations = {
 export default function Plot({ data, type, extra }) {
   // prettier-ignore
   data = [];
-  for (let i = 0; i < 50; i++) {
-    data.push({Date: `2020-${Math.floor(1 + i / 27)}-${i % 27}`, value: Math.random() * 30 + 110 + i})
+  for (let i = 0; i < 70; i++) {
+    data.push({Date: `2020-${Math.floor(1 + i / 27)}-${i % 27}`, value: Math.random() * 15 + 100 + i})
   }
   type = 'weight';
   extra = {
