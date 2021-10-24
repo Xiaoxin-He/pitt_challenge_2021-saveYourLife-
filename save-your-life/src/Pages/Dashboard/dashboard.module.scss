@@ -7,11 +7,11 @@
         margin-right: 12px;
         display: flex;
         flex-direction: column;
-        :first-child {
+        >:first-child {
             flex: 2;
             margin-bottom: 12px;
         }
-        :last-child {
+        >:last-child {
             flex: 1;
         }
     }

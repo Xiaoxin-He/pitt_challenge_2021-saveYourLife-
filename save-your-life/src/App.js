@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div />}>
           <Switch>
-            <Route path="/login" component={Login} />
+            <Route path={"/login", "/"} exact component={Login} />
             <Route component={Layout} />
           </Switch>
         </Suspense>

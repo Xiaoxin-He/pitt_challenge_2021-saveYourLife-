@@ -2,13 +2,14 @@ import styles from './dashboard.module.scss';
 import Block from '../../components/Block';
 import DataList from '../../components/DataList';
 import Plot from '../../components/Plot';
+import Warning from '../../components/Warning';
 
 export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <div className={styles['left-panel']}>
         <Block className="warning" link="/warning">
-          <Plot></Plot>
+          <Warning></Warning>
         </Block>
         <Block className="plan" link="/plan">
 

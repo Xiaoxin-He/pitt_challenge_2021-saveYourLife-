@@ -17,7 +17,7 @@ const Login = () => {
         try {
             console.log(emailRef.current.value);
             console.log(passwordRef.current.value);
-            history.push("/");
+            history.push("/dashboard");
         } catch(e){
             history.push("/login");
             alert("email or password in invalid!");
