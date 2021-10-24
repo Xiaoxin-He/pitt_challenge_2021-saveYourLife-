@@ -4,7 +4,7 @@ const randData = [];
 for (let i = 0; i < 30; i++) {
   randData.push({
     Date: `2021-${Math.floor(9 + i / 27)}-${i % 27 + 1}`,
-    value: Math.floor(Math.random() * 10 + 100 + i * 3)
+    value: Math.floor(Math.random() * 7 + 140 + i * 1.4)
   });
 }
 
