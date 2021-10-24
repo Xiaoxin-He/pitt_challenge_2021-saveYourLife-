@@ -23,15 +23,13 @@ return(
             // console.log("data",data.result)
             // console.log(key)
             return (
-                <div style={{display: "flex"}}>
+                <div>
                 <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={2} sm={4} md={4}>
-                      <FoodCard
-                        data = {data.result}
-                        key = {data.id}
-                        ></FoodCard>
-                </Grid>
+                    <FoodCard
+                    data = {data.result}
+                    key = {data.id}
+                    ></FoodCard>
                 </Grid>
               </Box>
               </div>

@@ -8,10 +8,10 @@ export default function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <div className={styles['left-panel']}>
-        <Block className="warning" link="/warning">
+        <Block className="warning">
           <Plot></Plot>
         </Block>
-        <Block className="plan" link="/plan">
+        <Block className="plan" link="/warning">
           <Warning></Warning>
         </Block>
       </div>

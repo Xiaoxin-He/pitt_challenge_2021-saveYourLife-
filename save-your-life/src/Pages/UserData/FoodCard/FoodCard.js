@@ -1,4 +1,4 @@
-import { Autocomplete, TextField, Card, CardContent, CardMedia, Typography, CardActionArea } from "@mui/material";
+import { Autocomplete, TextField, Card, CardContent, CardMedia, Typography, CardActionArea, Grid } from "@mui/material";
 import React, {useRef, useState, useEffect} from "react";
 import classes from "./FoodCard.module.css"
 
@@ -11,10 +11,10 @@ const FoodCard = (props) => {
     }, [])
 
     return (
-        <div>
+        <div style={{display: 'flex'}}>
         {currentData.current.map((data, key) => {  
             return(
-                <div>
+                <Grid item xs={2} sm={4} md={4}>
                     <Card sx={{ maxWidth: 345 }} className={classes.eachFood}>
                         <CardActionArea>
                             <CardMedia
@@ -33,7 +33,7 @@ const FoodCard = (props) => {
                                 </CardContent>
                             </CardActionArea>
                             </Card>
-                </div>
+                </Grid>
             )
         })}
         </div>
