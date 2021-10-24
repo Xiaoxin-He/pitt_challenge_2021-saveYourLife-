@@ -4,14 +4,23 @@ import React, {useRef, useState, useEffect} from "react";
 import classes from "./index.module.css";
 import defaultData from "./data.json";
 import FoodCard from "./FoodCard/FoodCard";
-
+import axios from 'axios';
 
 const UserData = () => {
 
-    const dataRef = useRef(defaultData);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        console.log(dataRef.current[0].result)
+        // console.log(dataRef.current[0].result)
+        // console.log(data)
+        async function fetchData() {
+            const res = await axios.request({
+                method: "get",
+                url: "/getAllFood/1/"
+            })
+            setData(res.data);
+        }
+        fetchData();
     }, [])
 
     const onInputWeight = (params) => {}
@@ -19,7 +28,7 @@ const UserData = () => {
 return(
 
     <div>
-        <Autocomplete
+        {/* <Autocomplete
         freeSolo
         id="free-solo-2-demo"
         className= {classes.food_input}
@@ -35,8 +44,9 @@ return(
             }}
           />
         )}
-      />
-        {dataRef.current.map((data, key) => {
+      /> */}
+        {/* {dataRef.current.map((data, key) => { */}
+        {data.map((data, key) => {
             // console.log("data",data.result)
             // console.log(key)
             return (
