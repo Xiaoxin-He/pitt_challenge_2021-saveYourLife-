@@ -6,6 +6,13 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 const STATIC_ROUTES = [
   {
+    name: 'Home',
+    link: 'home',
+    path: '/home',
+    component: lazy(() => import("../Pages/Home/Home")),
+    icon: DashboardIcon,
+  },
+  {
     name: 'Dashboard',
     link: 'dashboard',
     path: '/dashboard',

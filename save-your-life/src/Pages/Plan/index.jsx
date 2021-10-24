@@ -72,7 +72,8 @@ const steps = [
     {
         id:'yes-response2', 
         message:'Awesome! The records show you did exercising for 30 min', 
-        end:true,
+        // end:true,
+        trigger:'intro3',
     },
     {
         id:'no-response2', 
@@ -82,6 +83,39 @@ const steps = [
     },
     {
         id:'intro3', 
-        message:'Please go and do a 10min exercise', 
+        message:'Please go and do a 10min exercise, what kind of exercise would you like to take?', 
+        trigger:"option1"
+    },
+    {
+        id:"option1",
+        options:[
+          {value:'y', label:'yoga 30min', trigger:'message-3'},
+          {value:'n', label:'core training 20min', trigger:'message-3'},
+        ],
+    },
+    {
+      id: "message-3",
+      message:"What time did you fall asleep last night?",
+      trigger:"option2"
+    },
+    {
+      id:"option2",
+      options:[
+        {value:'y', label:'before 23:00', trigger:'yes-response3'},
+        {value:'n', label:'after 23:00', trigger:'no-response3'},
+      ],
+  },
+     {
+      id:"yes-response3",
+      message:"Well done! 🥳",
+      end:true,
+      // trigger:"message-4"
+    },
+    {
+      id:"no-response3",
+      message:"Sleep before 23:00 can help you on body mechanism, give a try! 😃",
+      // trigger:"message-4"
+      end:true,
     }
+    
    ]
