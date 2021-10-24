@@ -1,29 +1,35 @@
 import { List, ListItem, ListItemText, ListSubheader } from '@mui/material';
 import classNames from 'classnames';
 import { Fragment, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './DataList.module.scss';
 
 export default function DataList() {
-  const [dispData, setDispData] = useState([]);
+  const userWeights = useSelector((state) => state.userInfo.weight);
+  const userHeight = useSelector((state) => state.userInfo.height);
+  const lastWeight = userWeights[userWeights.length - 1].value;
+  const bmi = ((lastWeight * 0.45359237) / Math.pow(userHeight / 100, 2)).toFixed(2)
+  const dispData = [
+    {
+      label: 'Height',
+      value: `${Math.floor(userHeight / 30.48)}'${Math.floor(
+        (userHeight % 30.48) / 2.54
+      )}''`,
+      status: 0
+    },
+    {
+      label: 'Weight',
+      value: `${lastWeight} lbs.`,
+      status: 0
+    },
+    {
+      label: 'BMI',
+      value: bmi,
+      status: bmi > 25 || bmi < 18.5 ? 1 : 0
+    }
+  ];
   useEffect(() => {
     // TODO: load data from api;
-    setDispData([
-      {
-        label: 'Height',
-        value: "5'7''",
-        status: 0
-      },
-      {
-        label: 'Weight',
-        value: '180 lbs.',
-        status: 0
-      },
-      {
-        label: 'BMI',
-        value: '28.2',
-        status: 1
-      }
-    ]);
   }, []);
   return (
     <div className={styles['data-list']}>
@@ -40,8 +46,7 @@ export default function DataList() {
                 })}
                 primary={item.label}
                 secondary={item.value}
-              >
-              </ListItemText>
+              ></ListItemText>
             </ListItem>
           </Fragment>
         ))}

@@ -1,5 +1,6 @@
 import { Line, G2 } from '@antv/g2plot';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const annotations = {
   weight: ({ under, over }) => [
@@ -55,22 +56,24 @@ const annotations = {
   ]
 };
 
-export default function Plot({ data, type, extra }) {
+export default function Plot({ type, extra }) {
   // prettier-ignore
-  data = [];
-  for (let i = 0; i < 70; i++) {
-    data.push({Date: `2020-${Math.floor(1 + i / 27)}-${i % 27}`, value: Math.random() * 15 + 100 + i})
-  }
+  const data = useSelector(state => state.userInfo.weight)
   type = 'weight';
   extra = {
-    under: 120,
-    over: 170
+    under: 115,
+    over: 156
   };
   const [eleId, setEleId] = useState(() => `ele-${Math.random()}`);
+  const [plot, setPlot] = useState(null);
 
   useEffect(() => {
+    if (plot !== null) {
+      plot.changeData([...data])
+      return
+    }
     const line = new Line(eleId, {
-      data,
+      data: [...data],
       padding: 'auto',
       xField: 'Date',
       yField: 'value',
@@ -89,6 +92,8 @@ export default function Plot({ data, type, extra }) {
     });
 
     line.render();
+    setPlot(line);
+    // eslint-disable-next-line
   }, [data, eleId, extra, type]);
 
   return (
