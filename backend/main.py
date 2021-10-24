@@ -82,14 +82,17 @@ def insertFoodRecord():
     '''
     try:
         data = request.get_json()
-        uid = data["uid"]
+        uid = data["uid"] if "uid" in data else 1
         foods = data["foods"]
-        date = data["date"]
+        date = "2021-10-24"
 
         # call sql insert
         for food in foods:
-            print(uid, food, date)
+            values = (int(uid), int(food["food_id"]), float(food["amount"]), date)
+            sql = "INSERT INTO food_record VALUES (%s,%s,%s,%s)"
 
+            res = sql_util.execute(sql, values)
+        # print(sql_util.execute("select * from food_record;"))
         return jsonify([{"result": "succeed", "status": 200}])
     except Exception as e:
         return jsonify([{"result": e, "status": 500}])
