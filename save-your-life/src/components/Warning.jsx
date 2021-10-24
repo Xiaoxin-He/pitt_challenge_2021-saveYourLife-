@@ -13,23 +13,7 @@ export default function Warning() {
       // TODO: get warning list
       setLoading(true);
       setWarningList([
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' },
-        { title: '123', content: '123fkasdjlfasjdlksfjadlkkjflsd' }
+        { title: 'Overweight', content: 'Your BMI falls within the overweight range. It could indicate that ...' },
       ]);
       setLoading(false);
     }

@@ -9,10 +9,10 @@ export default function Dashboard() {
     <div className={styles.dashboard}>
       <div className={styles['left-panel']}>
         <Block className="warning" link="/warning">
-          <Warning></Warning>
+          <Plot></Plot>
         </Block>
         <Block className="plan" link="/plan">
-
+          <Warning></Warning>
         </Block>
       </div>
       <div className={styles['right-panel']}>
