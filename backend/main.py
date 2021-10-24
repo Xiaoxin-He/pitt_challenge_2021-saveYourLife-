@@ -113,7 +113,19 @@ def getAllMood():
 
 @app.route("/getAllSleep/")
 def getAllSleep():
-    return
+    try:
+        uid = 1
+        sql = "SELECT duration, date from sleep_record where uid=1 order by date desc limit 30"
+        sql_res = sql_util.execute(sql)
+        res = []
+        for duration, date in sql_res:
+            res.append({"sleeptime":float(duration), "date":date})
+
+        return jsonify([{"result": res, "status": 200}])
+
+    except Exception as e:
+        return jsonify([{"result": e, "status": 500}])
+    
 
 @app.route("/insertWeightMoodSleep", methods=["POST"])
 def insertWeight():
@@ -131,10 +143,10 @@ def insertWeight():
 
         data = request.get_json()
         uid = int(data["uid"]) if "uid" in data else 1
-        weight = float(data["weight"])
-        mood = int(data["mood"])
+        weight = float(data["weight"]) 
+        mood = int(data["mood"]) if "mood" in data else 5.0
         date = "2021-10-24"
-        sleeptime = float(data["sleeptime"])
+        sleeptime = float(data["sleeptime"]) if "mood" in data else 8.0
 
         # insert weight
         sql = "INSERT INTO weight_record VALUES (%s,%s,%s)"
