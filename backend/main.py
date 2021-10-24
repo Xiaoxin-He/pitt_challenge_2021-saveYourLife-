@@ -48,7 +48,7 @@ def getAllFood(pagenum):
         print(sql_res)
 
         res = []
-        for id, food, calorie, image in sql_res:
+        for id, image, food, calorie in sql_res:
             res.append({
                 "food_id": id,
                 "food_name": food,
