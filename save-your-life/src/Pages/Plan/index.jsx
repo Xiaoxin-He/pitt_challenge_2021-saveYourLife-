@@ -82,6 +82,6 @@ const steps = [
     },
     {
         id:'intro3', 
-        message:'Please follow this link to do a 10min exercise', 
+        message:'Please go and do a 10min exercise', 
     }
    ]

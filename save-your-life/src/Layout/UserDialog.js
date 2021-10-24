@@ -15,6 +15,7 @@ export default function UserDialog() {
   };
 
   const handleClose = () => {
+    alert("Thank you for your check in !")
     setOpen(false);
   };
 
