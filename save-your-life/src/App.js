@@ -11,7 +11,11 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div />}>
           <Switch>
+<<<<<<< Updated upstream
             <Route path="/login" component={Login} />
+=======
+            <Route path={"/login"} exact component={Login} />
+>>>>>>> Stashed changes
             <Route component={Layout} />
           </Switch>
         </Suspense>

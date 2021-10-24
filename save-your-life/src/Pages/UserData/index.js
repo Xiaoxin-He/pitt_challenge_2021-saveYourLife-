@@ -19,21 +19,38 @@ const UserData = () => {
 return(
 
     <div>
+
+        <div>
+            <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={weight}
+            sx={{width: 300}}
+            renderInput={(params) => <TextField {...params} label="weight" />}
+            />
+        </div>
+
         {dataRef.current.map((data, key) => {
             // console.log("data",data.result)
             // console.log(key)
             return (
                 <div style={{display: "flex"}}>
-                <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={2} sm={4} md={4}>
-                      <FoodCard
-                        data = {data.result}
-                        key = {data.id}
-                        ></FoodCard>
-                </Grid>
-                </Grid>
-              </Box>
+                {/* <Box sx={{ flexGrow: 1 }}> */}
+                {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}> */}
+                {/* <Grid item xs={2} sm={4} md={4}> */}
+                {Array.from(Array(6)).map((_, index) => (
+                    <Grid item xs={2} sm={4} md={4} key={index}>
+                    <FoodCard
+                    data = {data.result}
+                    key = {data.id}
+                    ></FoodCard>
+                        {/* <Item>xs=2</Item> */}
+                    </Grid>
+                    ))}
+         
+                {/* </Grid> */}
+                {/* </Grid> */}
+              {/* </Box> */}
               </div>
             )
         })
